@@ -10,8 +10,8 @@ assignees: ''
 **Describe the bug**
 A clear and concise description of what the bug is.
 
-**Peri App Version**
-[e.g. v2.4.2]
+**Rhythma App Version**
+- Version [e.g. 2.0.0]
 
 **To Reproduce**
 Steps to reproduce the behavior:

@@ -1,6 +1,6 @@
 {
-  "short_name": "Peri",
-  "name": "Peri - The Period Tracker App",
+  "short_name": "Rhythma",
+  "name": "Rhythma - An open-source, privacy-first menstrual cycle tracker",
   "icons": [
     {
       "src": "assets/icon/192-pwa.png",

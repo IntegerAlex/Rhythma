@@ -1,42 +1,43 @@
-Privacy Policy for Peri
+Privacy Policy for Rhythma
 Last updated: 2025-04-02
 
-Peri (“the Application”, “we”, “our”, or “us”) is an open source period tracker application. This Privacy Policy explains our practices regarding any personal data or other information you may interact with while using Peri.
+Rhythma (“the Application”, “we”, “our”, or “us”) is an open source period tracker application. This Privacy Policy explains our practices regarding any personal data or other information you may interact with while using Rhythma.
 
-1. Data Collection
-1.1. No Server-Side Data Collection
-Peri is designed so that no personal data is collected or transmitted to any server. All data is stored locally on your device. We do not track, collect, or transmit your personal data or any other information without your consent.
+Data Collection and Storage
 
-1.2. Local Storage
-All your data, including any period tracking or related information, remains on your device in local storage. The Application does not upload your data to any remote server or cloud service.
+We prioritize your privacy. Rhythma stores your primary period tracking and related information locally on your device. In addition, for enhanced data security, synchronization, and feature delivery, certain data may also be stored in a secure, privacy-compliant database managed by us. All data stored in this database adheres to industry standards for secrecy and integrity.
 
-1.3. Manual Data Sharing
-You have the option to manually export your data as a file for backup or sharing purposes. Data import/export is entirely under your control:
+We collect **anonymous and non-identifiable usage data** for the sole purpose of improving the Application's performance, features, and overall user experience. This data includes:
+- Telemetry: Information about application crashes, performance metrics, and general usage patterns (e.g., feature usage frequency). This data is aggregated and cannot be linked back to individual users.
+- Analysis: Statistical insights derived from aggregated, anonymous data to understand user needs and inform future development.
 
-Export: When you choose to export your data, it is saved as a file on your device.
-Import: Similarly, when you choose to import data, you manually select a file from your device.
-No data is automatically shared with any third parties or remote services.
+This unidentifiable data is not linked to you personally and does not contain any sensitive personal information.
 
-2. Data Usage
-Since Peri does not collect personal data:
+What happens if I uninstall the app?
 
-No user profiling: We do not use any data for analytics, advertising, or profiling.
-Local Operations: All application processing and storage of data are performed locally on your device.
+If you uninstall the Application, all your locally stored data will be deleted from your device. Data stored in our database, being non-identifiable, will be retained for analytical purposes but cannot be re-associated with you.
 
-3. Third-Party Services
-Peri is an open source application. We do not include or integrate any third-party services that collect or process your data. If you choose to share or upload your data via third-party tools or services, please review their respective privacy policies.
+Since Rhythma primarily uses non-identifiable data and is committed to privacy:
 
-4. Data Security
-While Peri stores all data locally on your device, it is important to note the following:
+- Your identifiable data is not sold to or shared with any third party.
+- Your data (identifiable or unidentifiable) is not used for advertising.
+- Your data (identifiable or unidentifiable) is not used for marketing purposes.
 
-Local Security: Ensure that your device is protected with appropriate security measures (such as password or biometric protection) to keep your personal information safe.
-Application Updates: We strive to maintain the security of the Application through regular updates. However, it is your responsibility to safeguard your device and data.
+Third-Party Services
 
-5. Children's Privacy
-Peri is intended for a general audience and does not deliberately collect any information from children under the age of 13. If you are a parent or guardian and believe that your child’s data has been inadvertently collected through manual sharing, please contact us immediately.
+Rhythma is an open source application. We strive to minimize reliance on third-party services that collect or process your data. Any third-party services integrated for database hosting, telemetry, or analytics will be selected based on their commitment to privacy and compatibility with GPLv3 principles. If you choose to share or upload your data via other third-party tools or services (e.g., exporting data to another application), you are subject to their respective privacy policies.
 
-6. Changes to This Privacy Policy
-We may update this Privacy Policy periodically. Any changes will be posted on this page with an updated "Last updated" date. Your continued use of Peri indicates that you accept such changes.
+Device Security
 
-7. Contact Us
-If you have any questions or concerns regarding this Privacy Policy or our data practices, please contact us by opening an issue on our GitHub repository or through the contact information provided in the project documentation.
+While Rhythma stores data locally on your device and securely in our database, it is important to note the following:
+
+- You are responsible for the security of your device.
+- We are not responsible for any unauthorized access to your data due to a lack of security on your device.
+
+Children's Privacy
+
+Rhythma is intended for a general audience and does not deliberately collect any information from children under the age of 13. If you are a parent or guardian and believe that your child’s data has been stored in the Application, please contact us immediately so we can take appropriate action.
+
+Changes to this Privacy Policy
+
+We may update this Privacy Policy periodically. Any changes will be posted on this page with an updated "Last updated" date. Your continued use of Rhythma indicates that you accept such changes.

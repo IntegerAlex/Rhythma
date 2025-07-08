@@ -75,7 +75,7 @@ We welcome contributions for translating our application into various languages.
    ]);
    ```
 
-10. Build the project (see instructions [here](https://github.com/IraSoro/peri/blob/master/BUILDING.md)).
+10. Build the project (see instructions [here](BUILDING.md)).
 
 11. Check the work of the `formatter` and `linter`. To do this, use the following commands:
 

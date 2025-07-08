@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: "peri.test",
-  appName: "Test Peri",
+  appId: "com.rhythma.app",
+  appName: "Rhythma",
   webDir: "dist",
 };
 

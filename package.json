@@ -1,11 +1,12 @@
 {
-  "name": "peri",
-  "description": "The Period Tracker App",
+  "name": "rhythma",
+  "description": "An open-source, privacy-first menstrual cycle tracker",
   "version": "2.6.4",
   "type": "module",
+  "license": "GPL-3.0-only",
   "author": {
-    "name": "Irina Sorokina",
-    "url": "https://github.com/IraSoro"
+    "name": "Akshat kotpalliwar",
+    "url": "https://github.com/IntegerAlex"
   },
   "scripts": {
     "dev": "vite",

@@ -453,7 +453,7 @@ export const Menu = (props: MenuProps) => {
             style={{ fontSize: "13px" }}
             color="medium"
           >
-            Peri - The Period Tracker App
+            Rhythma - An open-source, privacy-first menstrual cycle tracker
           </IonLabel>
           <IonLabel
             style={{ fontSize: "13px" }}

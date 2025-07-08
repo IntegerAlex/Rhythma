@@ -1,3 +1,6 @@
+// © 2025 Akshat kotpalliwar – GPLv3 license
+// © 2025 Irina Sorokina – MIT-style license
+
 import { useCallback, useContext, useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 import {
@@ -310,14 +313,14 @@ const App = (props: AppProps) => {
                   <IonRouterOutlet>
                     <Route
                       exact
-                      path="/peri/"
+                      path="/"
                     >
                       <TabHome />
                     </Route>
 
                     <Route
                       exact
-                      path="/peri-details/"
+                      path="/details/"
                     >
                       <TabDetails />
                     </Route>
@@ -326,7 +329,7 @@ const App = (props: AppProps) => {
                       exact
                       path="/"
                     >
-                      <Redirect to="/peri/" />
+                      <Redirect to="/" />
                     </Route>
                   </IonRouterOutlet>
 
@@ -357,7 +360,7 @@ const App = (props: AppProps) => {
 
                     <IonTabButton
                       tab="home"
-                      href="/peri/"
+                      href="/"
                       className={theme}
                       style={{ marginLeft: "auto" }}
                     >
@@ -365,7 +368,7 @@ const App = (props: AppProps) => {
                     </IonTabButton>
                     <IonTabButton
                       tab="details"
-                      href="/peri-details/"
+                      href="/details/"
                       className={theme}
                       style={{ marginLeft: "15px", marginRight: "20px" }}
                     >

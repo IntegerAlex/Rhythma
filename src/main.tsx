@@ -1,3 +1,6 @@
+// © 2025 Akshat kotpalliwar – GPLv3 license
+// © 2025 Irina Sorokina – MIT-style license
+
 import React from "react";
 import { createRoot } from "react-dom/client";
 

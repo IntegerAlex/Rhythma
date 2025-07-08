@@ -12,12 +12,12 @@ After that, you can start development server, which will be useful for quickly t
 npm start
 ```
 
-To build the native `peri` you need `Android Studio` installed and all necessary JDK/SDK. To install, follow the instruction <https://developer.android.com/studio/install>.
+To build the native `rhythma` you need `Android Studio` installed and all necessary JDK/SDK. To install, follow the instruction <https://developer.android.com/studio/install>.
 
 After installing Android Studio, you need to run the following command:
 
 ```shell
-npm run build # this command builds production-optimized Peri's code
+npm run build # this command builds production-optimized Rhythma's code
 npm install -g @ionic/cli@7.1.1 # this package will be installed globally to use capacitor
 npx cap sync
 npx cap add android
@@ -26,7 +26,7 @@ npx cap open android
 
 An `android` directory will be generated and you can open it with `Android Studio` and build the project based on this instruction <https://capacitorjs.com/docs/android>
 
-You can also create a development version of native `peri` using the following `Dockerfile`, just create it in the root of the `peri` project:
+You can also create a development version of native `rhythma` using the following `Dockerfile`, just create it in the root of the Rhythma project:
 
 ```dockerfile
 FROM node:latest
@@ -57,22 +57,22 @@ ENTRYPOINT [ "bash" ]
 And run:
 
 ```shell
-docker build -t peri-android-env:latest .
+docker build -t rhythma-android-env:latest .
 ```
 
 After that, you can start the container with:
 
 ```shell
-docker run -it --rm -v $(pwd):/home/app peri-android-env
+docker run -it --rm -v $(pwd):/home/app rhythma-android-env
 ```
 
 This Docker image already has `@ionic/cli`, `Android Studio` and all necessary JDK/SDK installed. You can just run the following commands to build the `apk` file:
 
 ```shell
-npm run build # this command builds production-optimized Peri's code
+npm run build # this command builds production-optimized Rhythma's code
 npx cap sync
 npx cap add android # generates Android project
 ./android/gradlew -p android/ assembleDebug # build debug apk file
 ```
 
-The `apk` file will be created at `peri/android/app/build/outputs/apk/debug/`. You can install it on your smartphone. During the installation phase, `Android` will show you a warning that you are trying to install a potentially harmful application, because your app is not signed. To get rid of this warning, you should build the application through `Android Studio` following the instructions above, the `Dockerfile`-based method is only suitable for building a test application so far.
+The `apk` file will be created at `android/app/build/outputs/apk/debug/`. You can install it on your smartphone. During the installation phase, `Android` will show you a warning that you are trying to install a potentially harmful application, because your app is not signed. To get rid of this warning, you should build the application through `Android Studio` following the instructions above, the `Dockerfile`-based method is only suitable for building a test application so far.
