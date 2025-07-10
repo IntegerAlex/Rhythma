@@ -193,6 +193,13 @@ ion-tab-button.details-tab {
     margin-right: 15px; /* Margin for the last button */
 }
 
+/* Profile tab specific styles */
+ion-tab-button.profile-tab {
+    background: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
+    margin-right: 15px; /* Margin for the last button */
+}
+
 /* Menu button specific styles */
 ion-tab-button.menu-button {
   width: 48px;

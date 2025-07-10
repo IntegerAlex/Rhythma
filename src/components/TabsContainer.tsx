@@ -13,8 +13,9 @@ import {
   IonContent,
 } from '@ionic/react';
 import { Route, Redirect } from 'react-router-dom';
-import { menuOutline } from 'ionicons/icons';
+import { menuOutline, personOutline } from 'ionicons/icons';
 import { useTranslation } from 'react-i18next';
+// import { UserButton, useUser } from '@stackframe/react';
 
 import TabHome from '../pages/TabHome';
 import TabDetails from '../pages/TabDetails';
@@ -27,6 +28,7 @@ interface TabsContainerProps {
 
 const TabsContainer: React.FC<TabsContainerProps> = ({ theme, needUpdate }) => {
   const { t } = useTranslation();
+  // const user = useUser();
 
   return (
     <IonPage>
@@ -79,6 +81,15 @@ const TabsContainer: React.FC<TabsContainerProps> = ({ theme, needUpdate }) => {
               className={`${theme} details-tab`}
             >
               <IonLabel>{t("Details")}</IonLabel>
+            </IonTabButton>
+            <IonTabButton
+              tab="profile"
+              href="#"
+              className={`${theme} profile-tab`}
+              onClick={() => alert('Profile feature coming soon!')}
+            >
+              <IonIcon icon={personOutline} />
+              <IonLabel>Profile</IonLabel>
             </IonTabButton>
           </IonTabBar>
         </IonTabs>

@@ -1,8 +1,8 @@
 // © 2025 Akshat kotpalliwar – GPLv3 license
 // © 2025 Irina Sorokina – MIT-style license
 
-import { useCallback, useContext, useEffect, useState } from "react";
-import { Redirect, Route } from "react-router-dom";
+import { useCallback, useContext, useEffect, useState, Suspense } from "react";
+import { Redirect, Route, useLocation } from "react-router-dom";
 import {
   IonApp,
   setupIonicReact,
@@ -12,8 +12,10 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { useTranslation } from "react-i18next";
+import { StackHandler, StackProvider, StackTheme } from '@stackframe/react';
 
 import TabsContainer from "./components/TabsContainer";
+import { stackClientApp } from "./stack";
 import "./App.css";
 
 /* Core CSS required for Ionic components to work properly */
@@ -71,6 +73,15 @@ const Badge = () => {
     />
   );
 };
+
+
+
+function HandlerRoutes() {
+  const location = useLocation();
+  return (
+    <StackHandler app={stackClientApp} location={location.pathname} fullPage />
+  );
+}
 
 interface AppProps {
   theme?: string;
@@ -255,49 +266,51 @@ const App = (props: AppProps) => {
   }, [notificationsStatus]);
 
   return (
-    <CyclesContext.Provider
-      value={{
-        cycles,
-        updateCycles: (newCycles) => {
-          updateCycles(newCycles).catch((err) => console.error(err));
-        },
-      }}
-    >
-      <ThemeContext.Provider value={{ theme, updateTheme }}>
-        <SettingsContext.Provider
-          value={{
-            notificationsStatus,
-            updateNotificationsStatus: (newStatus) => {
-              updateNotificationsStatus(newStatus).catch((err) =>
-                console.error(err),
-              );
-            },
-            maxNumberOfDisplayedCycles,
-            updateMaxNumberOfDisplayedCycles: (newValue) => {
-              updateMaxNumberOfDisplayedCycles(newValue).catch((err) =>
-                console.error(err),
-              );
-            },
-          }}
-        >
-          <IonApp>
-            <Menu contentId="main-content-router-outlet" />
-            <IonReactRouter>
-              <IonRouterOutlet id="main-content-router-outlet">
-                <Route
-                  path="/tabs"
-                >
-                  <TabsContainer theme={theme} needUpdate={needUpdate} />
-                </Route>
-                <Route exact path="/">
-                  <Redirect to="/tabs/home" />
-                </Route>
-              </IonRouterOutlet>
-            </IonReactRouter>
-          </IonApp>
-        </SettingsContext.Provider>
-      </ThemeContext.Provider>
-    </CyclesContext.Provider>
+    <Suspense fallback={<div>Loading...</div>}>
+      <CyclesContext.Provider
+        value={{
+          cycles,
+          updateCycles: (newCycles) => {
+            updateCycles(newCycles).catch((err) => console.error(err));
+          },
+        }}
+      >
+        <ThemeContext.Provider value={{ theme, updateTheme }}>
+          <SettingsContext.Provider
+            value={{
+              notificationsStatus,
+              updateNotificationsStatus: (newStatus) => {
+                updateNotificationsStatus(newStatus).catch((err) =>
+                  console.error(err),
+                );
+              },
+              maxNumberOfDisplayedCycles,
+              updateMaxNumberOfDisplayedCycles: (newValue) => {
+                updateMaxNumberOfDisplayedCycles(newValue).catch((err) =>
+                  console.error(err),
+                );
+              },
+            }}
+          >
+            <IonApp>
+              <Menu contentId="main-content-router-outlet" />
+              <IonReactRouter>
+                <IonRouterOutlet id="main-content-router-outlet">
+                  <Route
+                    path="/tabs"
+                  >
+                    <TabsContainer theme={theme} needUpdate={needUpdate} />
+                  </Route>
+                  <Route exact path="/">
+                    <Redirect to="/tabs/home" />
+                  </Route>
+                </IonRouterOutlet>
+              </IonReactRouter>
+            </IonApp>
+          </SettingsContext.Provider>
+        </ThemeContext.Provider>
+      </CyclesContext.Provider>
+    </Suspense>
   );
 };
 
