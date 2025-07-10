@@ -8,6 +8,9 @@ ion-tab-bar {
   border: 0;
 
   width: 100%;
+  display: flex;
+  justify-content: space-around; /* Distribute space evenly */
+  align-items: center;
 }
 
 ion-col {
@@ -57,27 +60,29 @@ ion-tab-bar.basic,
   border-left: 3px solid var(--ion-color-transparent-basic);
 }
 
+ion-tab-button {
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  border-radius: 10px; /* Rounded rectangle shape */
+  height: 48px; /* Standard height */
+  flex-grow: 1; /* Allow buttons to grow and fill space */
+  margin: 0 5px; /* Add some margin between buttons */
+}
+
 ion-tab-button.basic {
-  background: var(--ion-color-light);
+  background: var(--ion-color-light-basic);
   color: var(--ion-color-dark-basic);
   border: 1px var(--ion-color-light) solid;
-  border-radius: 10px;
   font-size: 13px;
-  height: 48px; /* Adjusted height */
-
-  --color-selected: var(--ion-color-dark-basic);
 }
 
 ion-tab-button.tab-selected.basic {
   background: var(--ion-color-dark-basic);
   color: var(--ion-color-light);
   border: 1px var(--ion-color-dark-basic) solid;
-  border-radius: 10px;
-  max-width: 100px;
   font-size: 14px;
-  height: 25px;
-
-  --color-selected: var(--ion-color-light);
 }
 
 ion-menu {
@@ -162,26 +167,41 @@ ion-tab-bar.dark,
 }
 
 ion-tab-button.dark {
-  background: var(--ion-color-calendar-dark);
-  color: var(--ion-color-dark-dark);
-  border: 1px var(--ion-color-calendar-dark) solid;
-  border-radius: 10px;
+  background: var(--ion-color-transparent-dark);
+  color: var(--ion-color-light-dark);
+  border: 1px var(--ion-color-transparent-dark) solid;
   font-size: 13px;
-  height: 48px; /* Adjusted height */
-
-  --color-selected: var(--ion-color-dark-dark);
 }
 
 ion-tab-button.tab-selected.dark {
-  background: var(--ion-color-dark-dark);
-  color: #000000;
-  border: 1px var(--ion-color-dark-dark) solid;
-  border-radius: 10px;
-  max-width: 100px;
+  background: var(--ion-color-dark);
+  color: var(--ion-color-dark-contrast);
+  border: 1px var(--ion-color-dark) solid;
   font-size: 14px;
-  height: 25px;
+}
 
-  --color-selected: var(--ion-color-light);
+/* Specific styles for Home and Details tabs based on image */
+ion-tab-button.home-tab {
+    background: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
+    margin-left: auto; /* Push home to the right */
+}
+
+ion-tab-button.details-tab {
+    background: var(--ion-color-secondary);
+    color: var(--ion-color-secondary-contrast);
+    margin-right: 15px; /* Margin for the last button */
+}
+
+/* Menu button specific styles */
+ion-tab-button.menu-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  --padding-start: 0;
+  --padding-end: 0;
+  margin-left: 15px; /* Align to the left */
+  flex-shrink: 0; /* Prevent it from shrinking */
 }
 
 ion-menu.dark::part(container) {
