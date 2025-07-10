@@ -369,6 +369,7 @@ const DemoAlert = () => {
 };
 
 const TabHome = () => {
+  console.log("TabHome component is rendering!");
   const theme = useContext(ThemeContext).theme;
 
   const [isInfoModal, setIsInfoModal] = useState(false);

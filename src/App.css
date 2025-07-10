@@ -4,12 +4,10 @@
 */
 
 ion-tab-bar {
-  height: 30px;
+  height: 56px; /* Adjusted height */
   border: 0;
 
   width: 100%;
-  max-width: 594px;
-  margin: 0 auto;
 }
 
 ion-col {
@@ -28,14 +26,6 @@ ion-col {
 #wide-screen {
   height: 100%;
   width: 100%;
-  max-width: 600px;
-
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#top-space {
-  height: 15px;
   max-width: 600px;
 
   margin-left: auto;
@@ -62,8 +52,7 @@ ion-datetime {
 
 /* basic group */
 ion-tab-bar.basic,
-#wide-screen.basic,
-#top-space.basic {
+#wide-screen.basic {
   border-right: 3px solid var(--ion-color-transparent-basic);
   border-left: 3px solid var(--ion-color-transparent-basic);
 }
@@ -73,9 +62,8 @@ ion-tab-button.basic {
   color: var(--ion-color-dark-basic);
   border: 1px var(--ion-color-light) solid;
   border-radius: 10px;
-  max-width: 100px;
   font-size: 13px;
-  height: 25px;
+  height: 48px; /* Adjusted height */
 
   --color-selected: var(--ion-color-dark-basic);
 }
@@ -103,6 +91,13 @@ ion-menu.basic::part(container) {
 ion-select.basic::part(text),
 ion-select.basic::part(icon) {
   color: var(--ion-color-text-basic);
+}
+
+ion-datetime.welcome-calendar-basic,
+ion-datetime.edit-calendar-basic,
+ion-datetime.view-calendar-basic,
+ion-datetime.view-calendar-today-ovulation-basic {
+  --background: var(--ion-color-calendar-basic);
 }
 
 ion-datetime.welcome-calendar-basic::part(calendar-day today),
@@ -161,8 +156,7 @@ button.alert-button.basic {
 
 /* dark group */
 ion-tab-bar.dark,
-#wide-screen.dark,
-#top-space.dark {
+#wide-screen.dark {
   border-right: 3px solid var(--ion-color-transparent-dark);
   border-left: 3px solid var(--ion-color-transparent-dark);
 }
@@ -172,9 +166,8 @@ ion-tab-button.dark {
   color: var(--ion-color-dark-dark);
   border: 1px var(--ion-color-calendar-dark) solid;
   border-radius: 10px;
-  max-width: 100px;
   font-size: 13px;
-  height: 25px;
+  height: 48px; /* Adjusted height */
 
   --color-selected: var(--ion-color-dark-dark);
 }

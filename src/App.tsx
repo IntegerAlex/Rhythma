@@ -5,22 +5,15 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
-  IonLabel,
-  IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
   setupIonicReact,
   IonHeader,
   IonContent,
-  IonMenuButton,
-  IonIcon,
+  IonRouterOutlet,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { menuOutline } from "ionicons/icons";
 import { useTranslation } from "react-i18next";
-import TabHome from "./pages/TabHome";
-import TabDetails from "./pages/TabDetails";
+
+import TabsContainer from "./components/TabsContainer";
 import "./App.css";
 
 /* Core CSS required for Ionic components to work properly */
@@ -288,95 +281,18 @@ const App = (props: AppProps) => {
           }}
         >
           <IonApp>
-            <Menu contentId="main-content" />
+            <Menu contentId="main-content-router-outlet" />
             <IonReactRouter>
-              <IonHeader
-                class="ion-no-border"
-                style={{
-                  backgroundColor: `var(--ion-color-background-${theme})`,
-                }}
-              >
-                <div
-                  id="top-space"
-                  className={theme}
-                  style={{
-                    background: `var(--ion-color-transparent-${theme})`,
-                  }}
-                />
-              </IonHeader>
-
-              <IonContent
-                id="main-content"
-                color={`background-${theme}`}
-              >
-                <IonTabs>
-                  <IonRouterOutlet>
-                    <Route
-                      exact
-                      path="/"
-                    >
-                      <TabHome />
-                    </Route>
-
-                    <Route
-                      exact
-                      path="/details/"
-                    >
-                      <TabDetails />
-                    </Route>
-
-                    <Route
-                      exact
-                      path="/"
-                    >
-                      <Redirect to="/" />
-                    </Route>
-                  </IonRouterOutlet>
-
-                  <IonTabBar
-                    className={theme}
-                    slot="top"
-                    color={`transparent-${theme}`}
-                  >
-                    <IonTabButton
-                      tab="menu"
-                      href="#"
-                      style={{
-                        background: `var(--ion-color-transparent-${theme})`,
-                        border: `var(--ion-color-transparent-${theme})`,
-                        maxWidth: "30px",
-                        marginLeft: "15px",
-                      }}
-                    >
-                      <IonMenuButton>
-                        <IonIcon
-                          color={`dark-${theme}`}
-                          icon={menuOutline}
-                          size="large"
-                        />
-                        {needUpdate && <Badge />}
-                      </IonMenuButton>
-                    </IonTabButton>
-
-                    <IonTabButton
-                      tab="home"
-                      href="/"
-                      className={theme}
-                      style={{ marginLeft: "auto" }}
-                    >
-                      <IonLabel>{t("Home")}</IonLabel>
-                    </IonTabButton>
-                    <IonTabButton
-                      tab="details"
-                      href="/details/"
-                      className={theme}
-                      style={{ marginLeft: "15px", marginRight: "20px" }}
-                    >
-                      <IonLabel>{t("Details")}</IonLabel>
-                    </IonTabButton>
-                  </IonTabBar>
-                </IonTabs>
-              </IonContent>
+              <IonRouterOutlet id="main-content-router-outlet">
+                <Route
+                  path="/tabs"
+                >
+                  <TabsContainer theme={theme} needUpdate={needUpdate} />
+                </Route>
+                <Route exact path="/">
+                  <Redirect to="/tabs/home" />
+                </Route>
+              </IonRouterOutlet>
             </IonReactRouter>
           </IonApp>
         </SettingsContext.Provider>
