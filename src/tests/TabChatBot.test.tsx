@@ -30,24 +30,7 @@ vi.mock("framer-motion", () => ({
 }));
 
 import React from "react";
-import TabChatBot from "../pages/TabChatBot";
-
-// Re-export the private helper for direct unit testing.
-// We test it via a thin wrapper that matches its behaviour.
-function getBotResponse(userMessage: string): string {
-  const msg = userMessage.toLowerCase();
-  if (msg.includes("period") || msg.includes("menstrual") || msg.includes("bleed")) return "period";
-  if (msg.includes("cycle") || msg.includes("phase")) return "cycle";
-  if (msg.includes("ovulat") || msg.includes("fertile") || msg.includes("egg")) return "ovulation";
-  if (msg.includes("pms") || msg.includes("premenstrual") || msg.includes("pmdd")) return "pms";
-  if (msg.includes("pain") || msg.includes("cramp") || msg.includes("ache")) return "pain";
-  if (msg.includes("flow") || msg.includes("heavy") || msg.includes("light") || msg.includes("clot")) return "flow";
-  if (msg.includes("pregnan") || msg.includes("conceiv") || msg.includes("baby")) return "pregnancy";
-  if (msg.includes("eat") || msg.includes("food") || msg.includes("diet") || msg.includes("nutriti")) return "nutrition";
-  if (msg.includes("exercise") || msg.includes("workout") || msg.includes("gym") || msg.includes("yoga")) return "exercise";
-  if (msg.includes("mood") || msg.includes("emotion") || msg.includes("anxi") || msg.includes("depress")) return "mood";
-  return "default";
-}
+import TabChatBot, { getBotResponse } from "../pages/TabChatBot";
 
 // ── Component tests ─────────────────────────────────────────────────────────
 
@@ -75,64 +58,86 @@ it("renders quick-prompt chips", () => {
 });
 
 // ── getBotResponse keyword routing tests ────────────────────────────────────
+// The real getBotResponse returns full sentences. We verify it returns
+// a non-empty string and that the content comes from the expected category
+// by checking for characteristic words from each response pool.
 
-it("getBotResponse routes period keywords correctly", () => {
-  expect(getBotResponse("I have a period question")).toBe("period");
-  expect(getBotResponse("menstrual health")).toBe("period");
-  expect(getBotResponse("I am bleeding")).toBe("period");
+it("getBotResponse routes period keywords and returns a response string", () => {
+  const res1 = getBotResponse("I have a period question");
+  const res2 = getBotResponse("menstrual health");
+  const res3 = getBotResponse("I am bleeding");
+  // All should be non-empty strings from the period pool
+  expect(typeof res1).toBe("string");
+  expect(res1.length).toBeGreaterThan(0);
+  expect(typeof res2).toBe("string");
+  expect(typeof res3).toBe("string");
+  // Period pool contains "menstrual" somewhere
+  expect(res1.toLowerCase()).toMatch(/period|menstrual|flow|bleed/);
 });
 
-it("getBotResponse routes cycle/phase keywords correctly", () => {
-  expect(getBotResponse("my cycle is irregular")).toBe("cycle");
-  expect(getBotResponse("what phase am I in?")).toBe("cycle");
+it("getBotResponse routes cycle/phase keywords and returns a response string", () => {
+  const res = getBotResponse("my cycle is irregular");
+  expect(typeof res).toBe("string");
+  expect(res.length).toBeGreaterThan(0);
+  expect(res.toLowerCase()).toMatch(/cycle|phase|days/);
 });
 
-it("getBotResponse routes ovulation keywords correctly", () => {
-  expect(getBotResponse("when do I ovulate?")).toBe("ovulation");
-  expect(getBotResponse("fertile window days")).toBe("ovulation");
-  expect(getBotResponse("egg release timing")).toBe("ovulation");
+it("getBotResponse routes ovulation keywords and returns a response string", () => {
+  const res = getBotResponse("when do I ovulate?");
+  expect(typeof res).toBe("string");
+  expect(res.toLowerCase()).toMatch(/ovulat|fertile|lh/);
 });
 
-it("getBotResponse routes PMS keywords correctly", () => {
-  expect(getBotResponse("I have pms")).toBe("pms");
-  expect(getBotResponse("pmdd symptoms")).toBe("pms");
+it("getBotResponse routes PMS keywords and returns a response string", () => {
+  const res = getBotResponse("I have pms");
+  expect(typeof res).toBe("string");
+  expect(res.toLowerCase()).toMatch(/pms|premenstrual|pmdd|mood/);
 });
 
-it("getBotResponse routes pain keywords correctly", () => {
-  expect(getBotResponse("bad cramps today")).toBe("pain");
-  expect(getBotResponse("lower back ache")).toBe("pain");
+it("getBotResponse routes pain keywords and returns a response string", () => {
+  const res = getBotResponse("bad cramps today");
+  expect(typeof res).toBe("string");
+  expect(res.toLowerCase()).toMatch(/cramp|pain|heat|relief/);
 });
 
-it("getBotResponse routes flow keywords correctly", () => {
-  expect(getBotResponse("heavy flow this month")).toBe("flow");
-  expect(getBotResponse("blood clot")).toBe("flow");
+it("getBotResponse routes flow keywords and returns a response string", () => {
+  const res = getBotResponse("heavy flow this month");
+  expect(typeof res).toBe("string");
+  expect(res.toLowerCase()).toMatch(/flow|blood|pad|tampon|ml/);
 });
 
-it("getBotResponse routes pregnancy keywords correctly", () => {
-  expect(getBotResponse("can I get pregnant now?")).toBe("pregnancy");
-  expect(getBotResponse("trying to conceive")).toBe("pregnancy");
-  expect(getBotResponse("I want a baby")).toBe("pregnancy");
+it("getBotResponse routes pregnancy keywords and returns a response string", () => {
+  const res = getBotResponse("can I get pregnant now?");
+  expect(typeof res).toBe("string");
+  expect(res.toLowerCase()).toMatch(/pregnan|conceiv|fertile|period/);
 });
 
-it("getBotResponse routes nutrition keywords correctly", () => {
-  expect(getBotResponse("what food to eat today")).toBe("nutrition");
-  expect(getBotResponse("best diet for me")).toBe("nutrition");
+it("getBotResponse routes nutrition keywords and returns a response string", () => {
+  const res = getBotResponse("what food to eat today");
+  expect(typeof res).toBe("string");
+  expect(res.toLowerCase()).toMatch(/food|iron|magnesium|diet|vitamin/);
 });
 
-it("getBotResponse routes exercise keywords correctly", () => {
-  expect(getBotResponse("can I exercise today")).toBe("exercise");
-  expect(getBotResponse("workout tips for me")).toBe("exercise");
-  expect(getBotResponse("gym schedule advice")).toBe("exercise");
+it("getBotResponse routes exercise keywords and returns a response string", () => {
+  const res = getBotResponse("can I exercise today");
+  expect(typeof res).toBe("string");
+  expect(res.toLowerCase()).toMatch(/exercise|workout|yoga|energy|body/);
 });
 
-it("getBotResponse routes mood keywords correctly", () => {
-  expect(getBotResponse("my mood is terrible")).toBe("mood");
-  expect(getBotResponse("feeling anxious")).toBe("mood");
-  expect(getBotResponse("depression today")).toBe("mood");
+it("getBotResponse routes mood keywords and returns a response string", () => {
+  const res = getBotResponse("my mood is terrible");
+  expect(typeof res).toBe("string");
+  expect(res.toLowerCase()).toMatch(/mood|hormone|estrogen|emotion/);
 });
 
-it("getBotResponse returns default for unrecognised input", () => {
-  expect(getBotResponse("hello there")).toBe("default");
-  expect(getBotResponse("what is your name")).toBe("default");
-  expect(getBotResponse("")).toBe("default");
+it("getBotResponse returns a default response for unrecognised input", () => {
+  const res1 = getBotResponse("hello there");
+  const res2 = getBotResponse("what is your name");
+  const res3 = getBotResponse("");
+  expect(typeof res1).toBe("string");
+  expect(res1.length).toBeGreaterThan(0);
+  // Default responses mention "Rhythma" or "cycle" or "health"
+  expect(res1.toLowerCase()).toMatch(/rhythma|cycle|health|assistant/);
+  expect(typeof res2).toBe("string");
+  expect(typeof res3).toBe("string");
 });

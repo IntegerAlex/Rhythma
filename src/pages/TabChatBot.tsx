@@ -83,7 +83,7 @@ const botResponses: Record<string, string[]> = {
   ],
 };
 
-function getBotResponse(userMessage: string): string {
+export function getBotResponse(userMessage: string): string {
   const msg = userMessage.toLowerCase();
 
   if (msg.includes("period") || msg.includes("menstrual") || msg.includes("bleed")) {
@@ -156,7 +156,8 @@ const TabChatBot = () => {
       return "Hi! I'm your Rhythma health assistant 💜 Start by marking your period dates, then I can give you personalized cycle insights!";
     }
     const parts = [`Hi! I'm your Rhythma health assistant 💜`];
-    parts.push(`Currently you're on ${cycleInfo.days}.`);
+    const daysText = typeof cycleInfo.days === "string" ? cycleInfo.days : String(cycleInfo.days);
+    parts.push(`Currently: ${daysText}.`);
     if (phase) parts.push(`You're in the ${phase.title} phase.`);
     if (ovulationStatus) parts.push(`Ovulation: ${ovulationStatus}.`);
     if (pregnancyChance) parts.push(`Pregnancy chance: ${pregnancyChance}.`);
