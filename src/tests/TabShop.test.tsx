@@ -10,10 +10,24 @@ vi.mock("framer-motion", () => ({
         const tag = String(key);
         // eslint-disable-next-line react/display-name
         const Comp = (props: Record<string, unknown>) => {
-          const { children, ...rest } = props as { children?: React.ReactNode; [k: string]: unknown };
+          const { children, ...rest } = props as {
+            children?: React.ReactNode;
+            [k: string]: unknown;
+          };
           const htmlProps: Record<string, unknown> = {};
           for (const k of Object.keys(rest)) {
-            if (!["initial", "animate", "exit", "transition", "whileTap", "whileHover", "layout", "variants"].includes(k)) {
+            if (
+              ![
+                "initial",
+                "animate",
+                "exit",
+                "transition",
+                "whileTap",
+                "whileHover",
+                "layout",
+                "variants",
+              ].includes(k)
+            ) {
               htmlProps[k] = rest[k];
             }
           }
@@ -44,13 +58,16 @@ it("shows the Wellness Shop heading", () => {
 it("renders product cards", () => {
   render(<TabShop />);
   expect(screen.getByText("Organic Menstrual Cup")).toBeDefined();
-  expect(screen.getByText("Herbal Pain Relief Patches")).toBeDefined();
+  expect(screen.getByText("Organic Cotton Tampons")).toBeDefined();
+  expect(screen.getByText("Biodegradable Bamboo Pads")).toBeDefined();
 });
 
 it("renders category filter chips", () => {
   render(<TabShop />);
   expect(screen.getByText("All")).toBeDefined();
-  expect(screen.getByText("Period Care")).toBeDefined();
+  expect(screen.getByText("Supplements")).toBeDefined();
+  expect(screen.getByText("Cups & Discs")).toBeDefined();
+  expect(screen.getByText("Pads & Tampons")).toBeDefined();
   expect(screen.getByText("Wellness")).toBeDefined();
 });
 

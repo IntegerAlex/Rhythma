@@ -207,7 +207,7 @@ const AverageValues = ({ cycles }: AverageValuesProps) => {
   return (
     <div
       id="general-block"
-      style={{ background: `var(--ion-color-calendar-${theme})` }}
+      className={`glass-card ${theme === "dark" ? "dark-theme" : ""}`}
     >
       <IonCol>
         <div id="inline-block">
@@ -246,16 +246,15 @@ const TabDetails = () => {
   const theme = useContext(ThemeContext).theme;
 
   return (
-    <IonPage
-      style={{ backgroundColor: `var(--ion-color-background-${theme})` }}
-    >
+    <IonPage style={{ backgroundColor: "transparent" }}>
       <div
         id="wide-screen"
         className={theme}
       >
         <IonContent
           className="ion-padding"
-          color={`transparent-${theme}`}
+          color="none"
+          style={{ "--background": "transparent" }}
         >
           <div id="width-details-screen">
             <motion.div
@@ -270,7 +269,7 @@ const TabDetails = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.15 }}
               id="progress-block"
-              style={{ background: `var(--ion-color-calendar-${theme})` }}
+              className={`glass-card ${theme === "dark" ? "dark-theme" : ""}`}
             >
               {cycles.length > 0 ? (
                 <IonList style={{ maxHeight: "475px", overflowY: "auto" }}>

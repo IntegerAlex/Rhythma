@@ -86,7 +86,11 @@ const botResponses: Record<string, string[]> = {
 export function getBotResponse(userMessage: string): string {
   const msg = userMessage.toLowerCase();
 
-  if (msg.includes("period") || msg.includes("menstrual") || msg.includes("bleed")) {
+  if (
+    msg.includes("period") ||
+    msg.includes("menstrual") ||
+    msg.includes("bleed")
+  ) {
     const responses = botResponses.period;
     return responses[Math.floor(Math.random() * responses.length)];
   }
@@ -94,11 +98,19 @@ export function getBotResponse(userMessage: string): string {
     const responses = botResponses.cycle;
     return responses[Math.floor(Math.random() * responses.length)];
   }
-  if (msg.includes("ovulat") || msg.includes("fertile") || msg.includes("egg")) {
+  if (
+    msg.includes("ovulat") ||
+    msg.includes("fertile") ||
+    msg.includes("egg")
+  ) {
     const responses = botResponses.ovulation;
     return responses[Math.floor(Math.random() * responses.length)];
   }
-  if (msg.includes("pms") || msg.includes("premenstrual") || msg.includes("pmdd")) {
+  if (
+    msg.includes("pms") ||
+    msg.includes("premenstrual") ||
+    msg.includes("pmdd")
+  ) {
     const responses = botResponses.pms;
     return responses[Math.floor(Math.random() * responses.length)];
   }
@@ -106,23 +118,47 @@ export function getBotResponse(userMessage: string): string {
     const responses = botResponses.pain;
     return responses[Math.floor(Math.random() * responses.length)];
   }
-  if (msg.includes("flow") || msg.includes("heavy") || msg.includes("light") || msg.includes("clot")) {
+  if (
+    msg.includes("flow") ||
+    msg.includes("heavy") ||
+    msg.includes("light") ||
+    msg.includes("clot")
+  ) {
     const responses = botResponses.flow;
     return responses[Math.floor(Math.random() * responses.length)];
   }
-  if (msg.includes("pregnan") || msg.includes("conceiv") || msg.includes("baby")) {
+  if (
+    msg.includes("pregnan") ||
+    msg.includes("conceiv") ||
+    msg.includes("baby")
+  ) {
     const responses = botResponses.pregnancy;
     return responses[Math.floor(Math.random() * responses.length)];
   }
-  if (msg.includes("eat") || msg.includes("food") || msg.includes("diet") || msg.includes("nutriti")) {
+  if (
+    msg.includes("eat") ||
+    msg.includes("food") ||
+    msg.includes("diet") ||
+    msg.includes("nutriti")
+  ) {
     const responses = botResponses.nutrition;
     return responses[Math.floor(Math.random() * responses.length)];
   }
-  if (msg.includes("exercise") || msg.includes("workout") || msg.includes("gym") || msg.includes("yoga")) {
+  if (
+    msg.includes("exercise") ||
+    msg.includes("workout") ||
+    msg.includes("gym") ||
+    msg.includes("yoga")
+  ) {
     const responses = botResponses.exercise;
     return responses[Math.floor(Math.random() * responses.length)];
   }
-  if (msg.includes("mood") || msg.includes("emotion") || msg.includes("anxi") || msg.includes("depress")) {
+  if (
+    msg.includes("mood") ||
+    msg.includes("emotion") ||
+    msg.includes("anxi") ||
+    msg.includes("depress")
+  ) {
     const responses = botResponses.mood;
     return responses[Math.floor(Math.random() * responses.length)];
   }
@@ -147,16 +183,26 @@ const TabChatBot = () => {
     useContext(SettingsContext).maxNumberOfDisplayedCycles;
 
   const cycleInfo = getDaysBeforePeriod(cycles, maxNumberOfDisplayedCycles);
-  const phase = cycles.length > 0 ? getPhase(cycles, maxNumberOfDisplayedCycles) : null;
-  const ovulationStatus = cycles.length > 0 ? getOvulationStatus(cycles, maxNumberOfDisplayedCycles) : null;
-  const pregnancyChance = cycles.length > 1 ? getPregnancyChance(cycles, maxNumberOfDisplayedCycles) : null;
+  const phase =
+    cycles.length > 0 ? getPhase(cycles, maxNumberOfDisplayedCycles) : null;
+  const ovulationStatus =
+    cycles.length > 0
+      ? getOvulationStatus(cycles, maxNumberOfDisplayedCycles)
+      : null;
+  const pregnancyChance =
+    cycles.length > 1
+      ? getPregnancyChance(cycles, maxNumberOfDisplayedCycles)
+      : null;
 
   const getContextualGreeting = () => {
     if (cycles.length === 0) {
       return "Hi! I'm your Rhythma health assistant 💜 Start by marking your period dates, then I can give you personalized cycle insights!";
     }
     const parts = [`Hi! I'm your Rhythma health assistant 💜`];
-    const daysText = typeof cycleInfo.days === "string" ? cycleInfo.days : String(cycleInfo.days);
+    const daysText =
+      typeof cycleInfo.days === "string"
+        ? cycleInfo.days
+        : String(cycleInfo.days);
     parts.push(`Currently: ${daysText}.`);
     if (phase) parts.push(`You're in the ${phase.title} phase.`);
     if (ovulationStatus) parts.push(`Ovulation: ${ovulationStatus}.`);
@@ -187,7 +233,10 @@ const TabChatBot = () => {
   }, []);
 
   const scrollToBottom = () => {
-    if (messagesEndRef.current && typeof messagesEndRef.current.scrollIntoView === "function") {
+    if (
+      messagesEndRef.current &&
+      typeof messagesEndRef.current.scrollIntoView === "function"
+    ) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
@@ -214,31 +263,36 @@ const TabChatBot = () => {
     setIsTyping(true);
 
     // Simulate bot thinking delay
-    botTimeoutRef.current = setTimeout(() => {
-      setMessages((prev) => {
-        const botMsg: ChatMessage = {
-          id: prev.length,
-          role: "bot",
-          text: getBotResponse(text),
-          timestamp: new Date(),
-        };
-        return [...prev, botMsg];
-      });
-      setIsTyping(false);
-    }, 800 + Math.random() * 600);
+    botTimeoutRef.current = setTimeout(
+      () => {
+        setMessages((prev) => {
+          const botMsg: ChatMessage = {
+            id: prev.length,
+            role: "bot",
+            text: getBotResponse(text),
+            timestamp: new Date(),
+          };
+          return [...prev, botMsg];
+        });
+        setIsTyping(false);
+      },
+      800 + Math.random() * 600,
+    );
   };
 
   const isBasic = theme === "basic";
-  const bgColor = `var(--ion-color-background-${theme})`;
-  const cardBg = isBasic ? "#fff" : "var(--ion-color-calendar-dark)";
-  const userBubbleBg = `var(--ion-color-dark-${theme})`;
-  const botBubbleBg = isBasic ? "var(--ion-color-light-basic)" : "var(--ion-color-transparent-dark)";
   const textColor = `var(--ion-color-text-${theme})`;
 
   return (
-    <IonPage style={{ backgroundColor: bgColor }}>
-      <div id="wide-screen" className={theme}>
-        <IonContent color={`transparent-${theme}`}>
+    <IonPage style={{ backgroundColor: "transparent" }}>
+      <div
+        id="wide-screen"
+        className={theme}
+      >
+        <IonContent
+          color="none"
+          style={{ "--background": "transparent" }}
+        >
           <div
             style={{
               display: "flex",
@@ -276,8 +330,8 @@ const TabChatBot = () => {
                 <p
                   style={{
                     margin: 0,
-                    fontSize: 18,
-                    fontWeight: "bold",
+                    fontSize: 24,
+                    fontWeight: "900",
                     color: textColor,
                   }}
                 >
@@ -286,8 +340,10 @@ const TabChatBot = () => {
                 <p
                   style={{
                     margin: 0,
-                    fontSize: 12,
-                    color: "var(--ion-color-medium)",
+                    fontSize: 13,
+                    color: textColor,
+                    opacity: 0.8,
+                    fontWeight: 500,
                   }}
                 >
                   Your personal cycle health guide
@@ -314,16 +370,17 @@ const TabChatBot = () => {
                   transition={{ delay: i * 0.08 }}
                   whileTap={{ scale: 0.93 }}
                   onClick={() => sendMessage(prompt)}
+                  className={`glass-btn ${!isBasic ? "dark-theme" : ""}`}
                   style={{
                     flexShrink: 0,
-                    padding: "6px 14px",
+                    padding: "8px 16px",
                     borderRadius: 20,
-                    border: `1.5px solid var(--ion-color-dark-${theme})`,
-                    background: "transparent",
-                    color: `var(--ion-color-dark-${theme})`,
-                    fontSize: 12,
+                    color: textColor,
+                    fontSize: 13,
+                    fontWeight: "600",
                     cursor: "pointer",
                     fontFamily: "inherit",
+                    border: "none",
                   }}
                 >
                   {prompt}
@@ -356,22 +413,28 @@ const TabChatBot = () => {
                     }}
                   >
                     <div
+                      className={
+                        msg.role === "user"
+                          ? ""
+                          : `glass-card ${!isBasic ? "dark-theme" : ""}`
+                      }
                       style={{
                         maxWidth: "78%",
-                        padding: "10px 14px",
+                        padding: "12px 16px",
                         borderRadius:
                           msg.role === "user"
-                            ? "18px 18px 4px 18px"
-                            : "18px 18px 18px 4px",
+                            ? "20px 20px 4px 20px"
+                            : "20px 20px 20px 4px",
                         background:
-                          msg.role === "user" ? userBubbleBg : botBubbleBg,
-                        color:
                           msg.role === "user"
-                            ? "#fff"
-                            : textColor,
-                        fontSize: 14,
+                            ? `var(--ion-color-dark-${theme})`
+                            : undefined,
+                        color: msg.role === "user" ? "#fff" : textColor,
+                        fontSize: 15,
                         lineHeight: 1.5,
-                        boxShadow: "0 1px 4px rgba(0,0,0,0.12)",
+                        fontWeight: "500",
+                        boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
+                        border: msg.role === "user" ? "none" : undefined,
                       }}
                     >
                       {msg.text}
@@ -394,10 +457,10 @@ const TabChatBot = () => {
                     }}
                   >
                     <div
+                      className={`glass-card ${!isBasic ? "dark-theme" : ""}`}
                       style={{
-                        padding: "10px 16px",
-                        borderRadius: "18px 18px 18px 4px",
-                        background: botBubbleBg,
+                        padding: "12px 16px",
+                        borderRadius: "20px 20px 20px 4px",
                         display: "flex",
                         alignItems: "center",
                         gap: 6,
@@ -431,11 +494,10 @@ const TabChatBot = () => {
               }}
             >
               <div
+                className={`glass-input ${!isBasic ? "dark-theme" : ""}`}
                 style={{
                   flex: 1,
-                  background: cardBg,
-                  borderRadius: 20,
-                  border: `1.5px solid var(--ion-color-dark-${theme})`,
+                  borderRadius: 24,
                   overflow: "hidden",
                 }}
               >
@@ -446,14 +508,15 @@ const TabChatBot = () => {
                   autoGrow
                   rows={1}
                   style={{
-                    "--padding-start": "14px",
-                    "--padding-end": "14px",
-                    "--padding-top": "8px",
-                    "--padding-bottom": "8px",
-                    fontSize: 14,
+                    "--padding-start": "16px",
+                    "--padding-end": "16px",
+                    "--padding-top": "10px",
+                    "--padding-bottom": "10px",
+                    fontSize: 15,
                     color: textColor,
                     "--background": "transparent",
                     "--border-width": "0",
+                    fontWeight: "500",
                   }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) {
@@ -472,7 +535,11 @@ const TabChatBot = () => {
                   color={`dark-${theme}`}
                   disabled={!inputText.trim() || isTyping}
                   onClick={() => sendMessage(inputText)}
-                  style={{ "--padding-start": "12px", "--padding-end": "12px" }}
+                  style={{
+                    "--padding-start": "12px",
+                    "--padding-end": "12px",
+                    height: "46px",
+                  }}
                 >
                   <IonIcon icon={sendOutline} />
                 </IonButton>

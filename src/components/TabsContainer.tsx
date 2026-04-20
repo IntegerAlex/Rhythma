@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   IonTabs,
   IonRouterOutlet,
@@ -10,16 +10,22 @@ import {
   IonPage,
   IonHeader,
   IonContent,
-} from '@ionic/react';
-import { Route } from 'react-router-dom';
-import { menuOutline, chatbubbleEllipsesOutline, bagHandleOutline, calendarOutline, listOutline } from 'ionicons/icons';
-import { useTranslation } from 'react-i18next';
+} from "@ionic/react";
+import { Route } from "react-router-dom";
+import {
+  menuOutline,
+  chatbubbleEllipsesOutline,
+  bagHandleOutline,
+  calendarOutline,
+  listOutline,
+} from "ionicons/icons";
+import { useTranslation } from "react-i18next";
 
-import TabHome from '../pages/TabHome';
-import TabDetails from '../pages/TabDetails';
-import TabChatBot from '../pages/TabChatBot';
-import TabShop from '../pages/TabShop';
-import Badge from './Badge';
+import TabHome from "../pages/TabHome";
+import TabDetails from "../pages/TabDetails";
+import TabChatBot from "../pages/TabChatBot";
+import TabShop from "../pages/TabShop";
+import Badge from "./Badge";
 
 interface TabsContainerProps {
   theme: string;
@@ -31,33 +37,56 @@ const TabsContainer: React.FC<TabsContainerProps> = ({ theme, needUpdate }) => {
 
   return (
     <IonPage>
+      {/* Global Liquid Animated Background */}
+      <div className={`liquid-bg-wrapper ${theme}`}>
+        <div className="liquid-blob blob-1"></div>
+        <div className="liquid-blob blob-2"></div>
+        <div className="liquid-blob blob-3"></div>
+      </div>
+
       <IonHeader
         class="ion-no-border"
         style={{
-          backgroundColor: `var(--ion-color-background-${theme})`,
+          backgroundColor: `transparent`,
         }}
+      ></IonHeader>
+      <IonContent
+        id="tabs-content"
+        color="none"
+        style={{ "--background": "transparent" }}
       >
-      </IonHeader>
-      <IonContent id="tabs-content" color={`background-${theme}`}>
         <IonTabs>
           <IonRouterOutlet>
-            <Route exact path="/tabs/home">
+            <Route
+              exact
+              path="/tabs/home"
+            >
               <TabHome />
             </Route>
-            <Route exact path="/tabs/details">
+            <Route
+              exact
+              path="/tabs/details"
+            >
               <TabDetails />
             </Route>
-            <Route exact path="/tabs/chat">
+            <Route
+              exact
+              path="/tabs/chat"
+            >
               <TabChatBot />
             </Route>
-            <Route exact path="/tabs/shop">
+            <Route
+              exact
+              path="/tabs/shop"
+            >
               <TabShop />
             </Route>
           </IonRouterOutlet>
           <IonTabBar
-            className={theme}
+            className={`glass-tab-bar ${theme}`}
             slot="bottom"
-            color={`transparent-${theme}`}
+            color="none"
+            style={{ "--background": "transparent" }}
           >
             <IonTabButton
               tab="menu"
@@ -112,4 +141,4 @@ const TabsContainer: React.FC<TabsContainerProps> = ({ theme, needUpdate }) => {
   );
 };
 
-export default TabsContainer; 
+export default TabsContainer;

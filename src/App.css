@@ -72,16 +72,17 @@ ion-tab-button {
 }
 
 ion-tab-button.basic {
-  background: var(--ion-color-light-basic);
+  background: transparent !important;
   color: var(--ion-color-dark-basic);
-  border: 1px var(--ion-color-light) solid;
+  border: none !important;
   font-size: 13px;
+  transition: all 0.3s ease;
 }
 
 ion-tab-button.tab-selected.basic {
-  background: var(--ion-color-dark-basic);
-  color: var(--ion-color-light);
-  border: 1px var(--ion-color-dark-basic) solid;
+  background: rgba(122, 0, 122, 0.1) !important; /* Soft primary glow */
+  color: var(--ion-color-dark-basic) !important;
+  border: none !important;
   font-size: 14px;
 }
 
@@ -167,16 +168,17 @@ ion-tab-bar.dark,
 }
 
 ion-tab-button.dark {
-  background: var(--ion-color-transparent-dark);
+  background: transparent !important;
   color: var(--ion-color-light-dark);
-  border: 1px var(--ion-color-transparent-dark) solid;
+  border: none !important;
   font-size: 13px;
+  transition: all 0.3s ease;
 }
 
 ion-tab-button.tab-selected.dark {
-  background: var(--ion-color-dark);
-  color: var(--ion-color-dark-contrast);
-  border: 1px var(--ion-color-dark) solid;
+  background: rgba(175, 176, 221, 0.1) !important;
+  color: #ffffff !important;
+  border: none !important;
   font-size: 14px;
 }
 
@@ -185,7 +187,7 @@ ion-tab-button.home-tab,
 ion-tab-button.details-tab,
 ion-tab-button.chat-tab,
 ion-tab-button.shop-tab {
-    flex: 1;
+  flex: 1;
 }
 
 /* Menu button specific styles */
@@ -318,4 +320,248 @@ ion-modal#alert-demo-modal {
 
 ion-modal#alert-demo-modal .wrapper {
   margin: 10px 20px 10px 10px;
+}
+.shop-container {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+/* Liquid Glass Animated Background */
+.liquid-bg-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--ion-color-background-basic); /* Fallback */
+}
+
+.basic .liquid-bg-wrapper {
+  background: var(--ion-color-background-basic);
+}
+
+.dark .liquid-bg-wrapper {
+  background: var(--ion-color-background-dark);
+}
+
+.liquid-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px); /* Increased blur for softer look */
+  opacity: 0.4; /* Lower opacity */
+  animation: floatBlob 20s infinite alternate ease-in-out;
+}
+
+.dark .liquid-blob {
+  opacity: 0.25; /* Very subtle in dark mode */
+}
+
+.blob-1 {
+  width: 500px;
+  height: 500px;
+  background: var(--ion-color-secondary); /* Soft Pink */
+  top: -20%;
+  left: -20%;
+  animation-delay: 0s;
+}
+
+.blob-2 {
+  width: 600px;
+  height: 600px;
+  background: var(--ion-color-primary); /* Soft Violet */
+  bottom: -20%;
+  right: -20%;
+  animation-delay: -5s;
+}
+
+.blob-3 {
+  width: 400px;
+  height: 400px;
+  background: var(--ion-color-tertiary); /* Teal */
+  top: 30%;
+  left: 30%;
+  transform: translateX(-50%);
+  animation-delay: -10s;
+}
+
+@keyframes floatBlob {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -30px) scale(1.05);
+  }
+  100% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+/* Glass Cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7); /* Cleaner, more opaque white */
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  box-shadow: 0 4px 24px -4px rgba(31, 41, 55, 0.05); /* Subtle dark gray shadow */
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.dark .glass-card,
+.glass-card.dark-theme {
+  background: rgba(31, 41, 55, 0.7); /* Gray 800 */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.3);
+}
+
+/* Glass Category Chips */
+.glass-chip {
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  color: var(--ion-color-text-basic) !important;
+  border-radius: 20px;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.glass-chip.chip-active {
+  background: var(--ion-color-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--ion-color-primary) !important;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important; /* Soft violet shadow */
+}
+
+.dark .glass-chip,
+.glass-chip.dark-theme {
+  background: rgba(31, 41, 55, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: var(--ion-color-text-dark) !important;
+}
+
+.dark .glass-chip.chip-active,
+.glass-chip.dark-theme.chip-active {
+  background: var(--ion-color-primary) !important;
+  border-color: var(--ion-color-primary) !important;
+  color: #ffffff !important;
+}
+
+/* Glass Modal */
+ion-modal.glass-modal {
+  --background: rgba(250, 250, 250, 0.8);
+  --backdrop-color: rgba(17, 24, 39, 0.4);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+}
+
+ion-modal.glass-modal.dark-theme {
+  --background: rgba(17, 24, 39, 0.85);
+  --backdrop-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Modal Internal Container */
+.glass-modal-content {
+  background: transparent;
+  height: 100%;
+}
+
+/* Glass Buttons */
+.glass-btn {
+  --background: rgba(255, 255, 255, 0.6);
+  --border-color: rgba(255, 255, 255, 0.8);
+  --border-radius: 14px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05);
+}
+
+.glass-btn.dark-theme {
+  --background: rgba(31, 41, 55, 0.6);
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+.glass-badge {
+  background: var(--ion-color-primary);
+  color: white;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+}
+
+.glass-cart-btn {
+  --background: rgba(255, 255, 255, 0.6);
+  --border-color: rgba(255, 255, 255, 0.8);
+  --border-radius: 50%;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05);
+}
+
+.glass-cart-btn.dark-theme {
+  --background: rgba(31, 41, 55, 0.6);
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Glass Tab Bar */
+ion-tab-bar.glass-tab-bar {
+  --background: rgba(250, 250, 250, 0.75) !important;
+  backdrop-filter: blur(32px) !important;
+  -webkit-backdrop-filter: blur(32px) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 -4px 24px -4px rgba(31, 41, 55, 0.05) !important;
+  background: rgba(250, 250, 250, 0.75) !important;
+}
+
+ion-tab-bar.glass-tab-bar.dark {
+  --background: rgba(17, 24, 39, 0.75) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 -4px 24px -4px rgba(0, 0, 0, 0.3) !important;
+  background: rgba(17, 24, 39, 0.75) !important;
+}
+
+ion-tab-button {
+  --background: transparent;
+}
+
+/* Glass Inputs */
+.glass-input {
+  --background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.glass-input.dark-theme,
+.dark .glass-input {
+  --background: rgba(30, 30, 30, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Glass Calendar */
+ion-datetime.view-calendar-basic,
+ion-datetime.edit-calendar-basic,
+ion-datetime.view-calendar-dark,
+ion-datetime.edit-calendar-dark {
+  --background: rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+.dark ion-datetime.view-calendar-dark,
+.dark ion-datetime.edit-calendar-dark {
+  --background: rgba(30, 30, 30, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }

@@ -412,9 +412,7 @@ const TabHome = () => {
     useContext(SettingsContext).maxNumberOfDisplayedCycles;
 
   return (
-    <IonPage
-      style={{ backgroundColor: `var(--ion-color-background-${theme})` }}
-    >
+    <IonPage style={{ backgroundColor: "transparent" }}>
       {configuration.features.demoMode && <DemoAlert />}
       <div
         id="wide-screen"
@@ -422,7 +420,8 @@ const TabHome = () => {
       >
         <IonContent
           className="ion-padding"
-          color={`transparent-${theme}`}
+          color="none"
+          style={{ "--background": "transparent" }}
         >
           <Welcome
             isOpen={isWelcomeModal}
