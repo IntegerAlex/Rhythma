@@ -3,7 +3,9 @@ import Lenis from "lenis";
 
 /**
  * Initialises a Lenis smooth-scroll instance on the provided
- * HTMLElement wrapper.  Returns a cleanup function (for useEffect).
+ * HTMLElement wrapper and returns a ref containing the current
+ * Lenis instance. Setup and cleanup are handled internally by
+ * the hook's useEffect lifecycle.
  */
 export function useLenis(wrapperRef: RefObject<HTMLElement | null>) {
   const lenisRef = useRef<Lenis | null>(null);
