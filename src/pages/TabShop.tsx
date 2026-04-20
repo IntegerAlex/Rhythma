@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import {
   IonContent,
   IonPage,
@@ -9,7 +9,6 @@ import {
   IonChip,
 } from "@ionic/react";
 import { cartOutline, closeOutline, starOutline, star, checkmarkCircleOutline } from "ionicons/icons";
-import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeContext } from "../state/Context";
 
@@ -133,13 +132,21 @@ interface CartItem extends Product {
 }
 
 const TabShop = () => {
-  const { t } = useTranslation();
   const theme = useContext(ThemeContext).theme;
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [addedId, setAddedId] = useState<number | null>(null);
   const [checkedOut, setCheckedOut] = useState(false);
+  const addedTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const checkoutTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (addedTimeoutRef.current !== null) clearTimeout(addedTimeoutRef.current);
+      if (checkoutTimeoutRef.current !== null) clearTimeout(checkoutTimeoutRef.current);
+    };
+  }, []);
 
   const isBasic = theme === "basic";
   const bgColor = `var(--ion-color-background-${theme})`;
@@ -168,7 +175,8 @@ const TabShop = () => {
       return [...prev, { ...product, qty: 1 }];
     });
     setAddedId(product.id);
-    setTimeout(() => setAddedId(null), 1500);
+    if (addedTimeoutRef.current !== null) clearTimeout(addedTimeoutRef.current);
+    addedTimeoutRef.current = setTimeout(() => setAddedId(null), 1500);
   };
 
   const removeFromCart = (id: number) => {
@@ -181,7 +189,8 @@ const TabShop = () => {
 
   const handleCheckout = () => {
     setCheckedOut(true);
-    setTimeout(() => {
+    if (checkoutTimeoutRef.current !== null) clearTimeout(checkoutTimeoutRef.current);
+    checkoutTimeoutRef.current = setTimeout(() => {
       setCart([]);
       setCheckedOut(false);
       setIsCartOpen(false);

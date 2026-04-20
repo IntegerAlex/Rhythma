@@ -1,5 +1,6 @@
 import { it, expect, vi } from "vitest";
 import { render } from "@testing-library/react";
+import type { ReactNode } from "react";
 
 // Mock the Stack auth module so tests don't require real project credentials
 vi.mock("../stack", () => ({
@@ -11,8 +12,8 @@ vi.mock("../stack", () => ({
 
 // Mock @stackframe/react to avoid StackClientApp constructor throwing
 vi.mock("@stackframe/react", () => ({
-  StackProvider: ({ children }: { children: React.ReactNode }) => children,
-  StackTheme: ({ children }: { children: React.ReactNode }) => children,
+  StackProvider: ({ children }: { children: ReactNode }) => children,
+  StackTheme: ({ children }: { children: ReactNode }) => children,
   StackHandler: () => null,
   StackClientApp: vi.fn().mockImplementation(() => ({})),
 }));

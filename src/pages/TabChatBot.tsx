@@ -176,6 +176,15 @@ const TabChatBot = () => {
   const [inputText, setInputText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const botTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (botTimeoutRef.current !== null) {
+        clearTimeout(botTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const scrollToBottom = () => {
     if (messagesEndRef.current && typeof messagesEndRef.current.scrollIntoView === "function") {
@@ -205,7 +214,7 @@ const TabChatBot = () => {
     setIsTyping(true);
 
     // Simulate bot thinking delay
-    setTimeout(() => {
+    botTimeoutRef.current = setTimeout(() => {
       setMessages((prev) => {
         const botMsg: ChatMessage = {
           id: prev.length,
