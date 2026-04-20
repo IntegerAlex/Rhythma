@@ -9,16 +9,16 @@ import {
   IonMenuButton,
   IonPage,
   IonHeader,
-  IonToolbar,
   IonContent,
 } from '@ionic/react';
-import { Route, Redirect } from 'react-router-dom';
-import { menuOutline, personOutline } from 'ionicons/icons';
+import { Route } from 'react-router-dom';
+import { menuOutline, chatbubbleEllipsesOutline, bagHandleOutline, calendarOutline, listOutline } from 'ionicons/icons';
 import { useTranslation } from 'react-i18next';
-// import { UserButton, useUser } from '@stackframe/react';
 
 import TabHome from '../pages/TabHome';
 import TabDetails from '../pages/TabDetails';
+import TabChatBot from '../pages/TabChatBot';
+import TabShop from '../pages/TabShop';
 import Badge from './Badge';
 
 interface TabsContainerProps {
@@ -28,7 +28,6 @@ interface TabsContainerProps {
 
 const TabsContainer: React.FC<TabsContainerProps> = ({ theme, needUpdate }) => {
   const { t } = useTranslation();
-  // const user = useUser();
 
   return (
     <IonPage>
@@ -48,10 +47,16 @@ const TabsContainer: React.FC<TabsContainerProps> = ({ theme, needUpdate }) => {
             <Route exact path="/tabs/details">
               <TabDetails />
             </Route>
+            <Route exact path="/tabs/chat">
+              <TabChatBot />
+            </Route>
+            <Route exact path="/tabs/shop">
+              <TabShop />
+            </Route>
           </IonRouterOutlet>
           <IonTabBar
             className={theme}
-            slot="top"
+            slot="bottom"
             color={`transparent-${theme}`}
           >
             <IonTabButton
@@ -73,6 +78,7 @@ const TabsContainer: React.FC<TabsContainerProps> = ({ theme, needUpdate }) => {
               href="/tabs/home"
               className={`${theme} home-tab`}
             >
+              <IonIcon icon={calendarOutline} />
               <IonLabel>{t("Home")}</IonLabel>
             </IonTabButton>
             <IonTabButton
@@ -80,16 +86,24 @@ const TabsContainer: React.FC<TabsContainerProps> = ({ theme, needUpdate }) => {
               href="/tabs/details"
               className={`${theme} details-tab`}
             >
+              <IonIcon icon={listOutline} />
               <IonLabel>{t("Details")}</IonLabel>
             </IonTabButton>
             <IonTabButton
-              tab="profile"
-              href="#"
-              className={`${theme} profile-tab`}
-              onClick={() => alert('Profile feature coming soon!')}
+              tab="chat"
+              href="/tabs/chat"
+              className={`${theme} chat-tab`}
             >
-              <IonIcon icon={personOutline} />
-              <IonLabel>Profile</IonLabel>
+              <IonIcon icon={chatbubbleEllipsesOutline} />
+              <IonLabel>{t("Chat")}</IonLabel>
+            </IonTabButton>
+            <IonTabButton
+              tab="shop"
+              href="/tabs/shop"
+              className={`${theme} shop-tab`}
+            >
+              <IonIcon icon={bagHandleOutline} />
+              <IonLabel>{t("Shop")}</IonLabel>
             </IonTabButton>
           </IonTabBar>
         </IonTabs>
