@@ -208,7 +208,8 @@ const ViewCalendar = (props: SelectCalendarProps) => {
     >
       <IonButtons slot="buttons">
         <IonButton
-          color={`dark-${theme}`}
+          color="primary"
+          style={{ fontWeight: "700" }}
           onClick={() => {
             props.setIsEditCalendar(true);
           }}
@@ -290,7 +291,8 @@ const EditCalendar = (props: SelectCalendarProps) => {
     >
       <IonButtons slot="buttons">
         <IonButton
-          color={`blackout-${theme}`}
+          color="medium"
+          style={{ fontWeight: "600" }}
           onClick={() => {
             props.setIsEditCalendar(false);
           }}
@@ -298,7 +300,8 @@ const EditCalendar = (props: SelectCalendarProps) => {
           {t("cancel")}
         </IonButton>
         <IonButton
-          color={`blackout-${theme}`}
+          color="primary"
+          style={{ fontWeight: "700" }}
           onClick={() => {
             // NOTE: `confirm` should be called to update values in `datetimeRef`
             datetimeRef.current?.confirm().catch((err) => console.error(err));
@@ -439,6 +442,8 @@ const TabHome = () => {
                   style={{
                     fontSize: "35px",
                     color: `var(--ion-color-text-${theme})`,
+                    fontWeight: "800",
+                    textShadow: "0 2px 10px rgba(0,0,0,0.05)",
                   }}
                 >
                   {
@@ -458,16 +463,17 @@ const TabHome = () => {
                   style={
                     cycles.length === 1
                       ? {
-                          fontWeight: "bold",
-                          fontSize: "35px",
-                          color: `var(--ion-color-dark-${theme})`,
+                          fontWeight: "900",
+                          fontSize: "40px",
+                          color: `var(--ion-color-primary)`,
                           marginBottom: "30px",
                         }
                       : {
-                          fontWeight: "bold",
-                          fontSize: "40px",
-                          color: `var(--ion-color-dark-${theme})`,
+                          fontWeight: "900",
+                          fontSize: "56px",
+                          color: `var(--ion-color-primary)`,
                           marginBottom: "30px",
+                          letterSpacing: "-2px",
                         }
                   }
                 >
@@ -494,10 +500,17 @@ const TabHome = () => {
               <IonCol style={{ marginBottom: "20px" }}>
                 <motion.div whileTap={{ scale: 0.93 }}>
                   <IonButton
-                    className="main"
+                    className="main glass-btn"
                     mode="md"
-                    color={`dark-${theme}`}
+                    color="primary"
                     disabled={isPeriodToday(cycles)}
+                    style={{
+                      "--border-radius": "20px",
+                      "--box-shadow": "0 4px 16px rgba(139, 92, 246, 0.4)",
+                      fontSize: "16px",
+                      fontWeight: "700",
+                      height: "48px",
+                    }}
                     onClick={() => {
                       const newCycles = getNewCyclesHistory(
                         getPeriodDatesWithNewElement(

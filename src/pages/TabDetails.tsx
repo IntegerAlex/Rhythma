@@ -103,10 +103,21 @@ const CurrentCycle = () => {
     return Math.max(max, item.cycleLength);
   }, dayOfCycle);
 
+  const textColor = `var(--ion-color-text-${theme})`;
+
   return (
     <div style={{ marginLeft: "15px" }}>
       <IonLabel mode="md">
-        <p style={lenCycleStyle}>{title}</p>
+        <p
+          style={{
+            fontSize: "14px",
+            color: textColor,
+            textAlign: "left",
+            fontWeight: "700",
+          }}
+        >
+          {title}
+        </p>
       </IonLabel>
       <IonProgressBar
         className={`current-progress-${theme}`}
@@ -118,7 +129,15 @@ const CurrentCycle = () => {
         buffer={setProgressBar(dayOfCycle, maxLength)}
       />
       <IonLabel mode="md">
-        <p style={datesStyle}>{format(startDate, "MMMM d")}</p>
+        <p
+          style={{
+            fontSize: "12px",
+            color: "var(--ion-color-medium)",
+            textAlign: "left",
+          }}
+        >
+          {format(startDate, "MMMM d")}
+        </p>
       </IonLabel>
     </div>
   );
@@ -141,12 +160,22 @@ const ListProgress = () => {
 
   const ItemProgress = (props: IdxProps) => {
     const info = useInfoForOneCycle(props.idx + 1);
+    const textColor = `var(--ion-color-text-${theme})`;
 
     return (
       <div style={{ marginTop: "20px" }}>
         <div style={{ marginLeft: "15px" }}>
           <IonLabel mode="md">
-            <p style={lenCycleStyle}>{info.lengthOfCycleString}</p>
+            <p
+              style={{
+                fontSize: "14px",
+                color: textColor,
+                textAlign: "left",
+                fontWeight: "600",
+              }}
+            >
+              {info.lengthOfCycleString}
+            </p>
           </IonLabel>
           <IonProgressBar
             mode="md"
@@ -156,7 +185,15 @@ const ListProgress = () => {
             buffer={setProgressBar(info.lengthOfCycleNumber, maxLength)}
           />
           <IonLabel mode="md">
-            <p style={datesStyle}>{info.dates}</p>
+            <p
+              style={{
+                fontSize: "12px",
+                color: "var(--ion-color-medium)",
+                textAlign: "left",
+              }}
+            >
+              {info.dates}
+            </p>
           </IonLabel>
         </div>
       </div>
@@ -272,12 +309,24 @@ const TabDetails = () => {
               className={`glass-card ${theme === "dark" ? "dark-theme" : ""}`}
             >
               {cycles.length > 0 ? (
-                <IonList style={{ maxHeight: "475px", overflowY: "auto" }}>
+                <IonList
+                  style={{
+                    maxHeight: "475px",
+                    overflowY: "auto",
+                    background: "transparent",
+                  }}
+                >
                   <CurrentCycle />
                   {cycles.length > 1 && <ListProgress />}
                 </IonList>
               ) : (
-                <p className="no-periods">
+                <p
+                  className="no-periods"
+                  style={{
+                    color: `var(--ion-color-text-${theme})`,
+                    opacity: 0.7,
+                  }}
+                >
                   {t("You haven't marked any periods yet")}
                 </p>
               )}

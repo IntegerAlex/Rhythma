@@ -20,16 +20,16 @@
 
 p.h_style-basic {
   font-size: 22px;
-  color: var(--ion-color-dark-basic);
+  color: var(--ion-color-text-basic);
   margin-top: 10px;
-  font-weight: bold;
+  font-weight: 800;
 }
 
 p.h_style-dark {
   font-size: 22px;
-  color: var(--ion-color-dark-dark);
+  color: var(--ion-color-text-dark);
   margin-top: 10px;
-  font-weight: bold;
+  font-weight: 800;
 }
 
 p.p_style {
@@ -47,14 +47,14 @@ p.no-periods {
   width: 2px;
   height: 70px;
   margin-top: 5px;
-  background: #e2e3e7;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 #vertical-line-dark {
   width: 2px;
   height: 70px;
   margin-top: 5px;
-  background: #717274;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 #progress-block {
