@@ -1,11 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import Lenis from "lenis";
 
 /**
  * Initialises a Lenis smooth-scroll instance on the provided
  * HTMLElement wrapper.  Returns a cleanup function (for useEffect).
  */
-export function useLenis(wrapperRef: React.RefObject<HTMLElement | null>) {
+export function useLenis(wrapperRef: RefObject<HTMLElement | null>) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
