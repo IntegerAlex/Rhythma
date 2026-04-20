@@ -12,6 +12,7 @@ import {
   IonModal,
   IonToolbar,
 } from "@ionic/react";
+import { motion } from "framer-motion";
 import { App } from "@capacitor/app";
 import { Capacitor } from "@capacitor/core";
 import { useTranslation } from "react-i18next";
@@ -428,7 +429,12 @@ const TabHome = () => {
             setIsOpen={setIsWelcomeModal}
           />
           <div id="context-size">
-            <div style={{ marginTop: "30px", marginBottom: "30px" }}>
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45 }}
+              style={{ marginTop: "30px", marginBottom: "30px" }}
+            >
               <IonLabel mode="md">
                 <p
                   style={{
@@ -442,8 +448,12 @@ const TabHome = () => {
                   }
                 </p>
               </IonLabel>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
               <IonLabel mode="md">
                 <p
                   style={
@@ -465,38 +475,58 @@ const TabHome = () => {
                   {getDaysBeforePeriod(cycles, maxNumberOfDisplayedCycles).days}
                 </p>
               </IonLabel>
-            </div>
-            <InfoButton setIsInfoModal={setIsInfoModal} />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
+              <InfoButton setIsInfoModal={setIsInfoModal} />
+            </motion.div>
             <InfoModal
               isOpen={isInfoModal}
               setIsOpen={setIsInfoModal}
             />
-            <IonCol style={{ marginBottom: "20px" }}>
-              <IonButton
-                className="main"
-                mode="md"
-                color={`dark-${theme}`}
-                disabled={isPeriodToday(cycles)}
-                onClick={() => {
-                  const newCycles = getNewCyclesHistory(
-                    getPeriodDatesWithNewElement(
-                      cycles,
-                      maxNumberOfDisplayedCycles,
-                    ),
-                  );
-                  updateCycles(newCycles);
-                }}
-              >
-                {t("mark")}
-              </IonButton>
-            </IonCol>
-            <IonCol>
-              {isEditCalendar ? (
-                <EditCalendar setIsEditCalendar={setIsEditCalendar} />
-              ) : (
-                <ViewCalendar setIsEditCalendar={setIsEditCalendar} />
-              )}
-            </IonCol>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+            >
+              <IonCol style={{ marginBottom: "20px" }}>
+                <motion.div whileTap={{ scale: 0.93 }}>
+                  <IonButton
+                    className="main"
+                    mode="md"
+                    color={`dark-${theme}`}
+                    disabled={isPeriodToday(cycles)}
+                    onClick={() => {
+                      const newCycles = getNewCyclesHistory(
+                        getPeriodDatesWithNewElement(
+                          cycles,
+                          maxNumberOfDisplayedCycles,
+                        ),
+                      );
+                      updateCycles(newCycles);
+                    }}
+                  >
+                    {t("mark")}
+                  </IonButton>
+                </motion.div>
+              </IonCol>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <IonCol>
+                {isEditCalendar ? (
+                  <EditCalendar setIsEditCalendar={setIsEditCalendar} />
+                ) : (
+                  <ViewCalendar setIsEditCalendar={setIsEditCalendar} />
+                )}
+              </IonCol>
+            </motion.div>
           </div>
         </IonContent>
       </div>

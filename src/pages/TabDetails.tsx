@@ -9,6 +9,7 @@ import {
 } from "@ionic/react";
 import { useTranslation } from "react-i18next";
 import { addDays, startOfDay } from "date-fns";
+import { motion } from "framer-motion";
 
 import {
   getAverageLengthOfCycle,
@@ -257,8 +258,17 @@ const TabDetails = () => {
           color={`transparent-${theme}`}
         >
           <div id="width-details-screen">
-            <AverageValues cycles={cycles} />
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <AverageValues cycles={cycles} />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.15 }}
               id="progress-block"
               style={{ background: `var(--ion-color-calendar-${theme})` }}
             >
@@ -272,7 +282,7 @@ const TabDetails = () => {
                   {t("You haven't marked any periods yet")}
                 </p>
               )}
-            </div>
+            </motion.div>
           </div>
         </IonContent>
       </div>
