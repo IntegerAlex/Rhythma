@@ -352,34 +352,37 @@ const TabShop = () => {
             <div
               style={{
                 display: "flex",
-                gap: 10,
+                gap: 8,
                 overflowX: "auto",
-                paddingBottom: 12,
-                marginBottom: 20,
+                paddingBottom: 8,
+                marginBottom: 16,
                 scrollbarWidth: "none",
               }}
             >
               {CATEGORIES.map((cat, i) => (
-                <motion.div
+                <motion.button
                   key={cat}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: i * 0.06 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`glass-chip ${selectedCategory === cat ? "chip-active" : ""} ${!isBasic ? "dark-theme" : ""}`}
+                  style={{
+                    flexShrink: 0,
+                    padding: "8px 20px",
+                    borderRadius: 24,
+                    fontSize: 14,
+                    fontWeight: selectedCategory === cat ? "700" : "600",
+                    cursor: "pointer",
+                    fontFamily: "inherit",
+                    border: "none",
+                    color: selectedCategory === cat ? "#fff" : textColor,
+                    outline: "none"
+                  }}
                 >
-                  <IonChip
-                    className={`glass-chip ${selectedCategory === cat ? "chip-active" : ""} ${!isBasic ? "dark-theme" : ""}`}
-                    onClick={() => setSelectedCategory(cat)}
-                    style={{
-                      fontWeight: selectedCategory === cat ? "600" : "500",
-                      padding: "0 18px",
-                      height: 38,
-                      fontSize: 14,
-                      margin: 0,
-                    }}
-                  >
-                    {cat}
-                  </IonChip>
-                </motion.div>
+                  {cat}
+                </motion.button>
               ))}
             </div>
 
