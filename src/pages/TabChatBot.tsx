@@ -370,17 +370,15 @@ const TabChatBot = () => {
                   transition={{ delay: i * 0.08 }}
                   whileTap={{ scale: 0.93 }}
                   onClick={() => sendMessage(prompt)}
-                  className={`glass-btn ${!isBasic ? "dark-theme" : ""}`}
+                  className={`glass-chip ${!isBasic ? "dark-theme" : ""}`}
                   style={{
                     flexShrink: 0,
                     padding: "8px 16px",
                     borderRadius: 20,
-                    color: textColor,
                     fontSize: 13,
                     fontWeight: "600",
                     cursor: "pointer",
                     fontFamily: "inherit",
-                    border: "none",
                   }}
                 >
                   {prompt}
@@ -427,7 +425,7 @@ const TabChatBot = () => {
                             : "20px 20px 20px 4px",
                         background:
                           msg.role === "user"
-                            ? `var(--ion-color-dark-${theme})`
+                            ? `var(--ion-color-primary)`
                             : undefined,
                         color: msg.role === "user" ? "#fff" : textColor,
                         fontSize: 15,
@@ -532,7 +530,7 @@ const TabChatBot = () => {
               >
                 <IonButton
                   shape="round"
-                  color={`dark-${theme}`}
+                  color="primary"
                   disabled={!inputText.trim() || isTyping}
                   onClick={() => sendMessage(inputText)}
                   style={{
