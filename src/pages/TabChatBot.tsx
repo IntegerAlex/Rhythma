@@ -190,25 +190,31 @@ const TabChatBot = () => {
   const sendMessage = (text: string) => {
     if (!text.trim()) return;
 
-    const userMsg: ChatMessage = {
-      id: messages.length,
-      role: "user",
-      text: text.trim(),
-      timestamp: new Date(),
-    };
-    setMessages((prev) => [...prev, userMsg]);
+    const trimmedText = text.trim();
+
+    setMessages((prev) => {
+      const userMsg: ChatMessage = {
+        id: prev.length,
+        role: "user",
+        text: trimmedText,
+        timestamp: new Date(),
+      };
+      return [...prev, userMsg];
+    });
     setInputText("");
     setIsTyping(true);
 
     // Simulate bot thinking delay
     setTimeout(() => {
-      const botMsg: ChatMessage = {
-        id: messages.length + 1,
-        role: "bot",
-        text: getBotResponse(text),
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, botMsg]);
+      setMessages((prev) => {
+        const botMsg: ChatMessage = {
+          id: prev.length,
+          role: "bot",
+          text: getBotResponse(text),
+          timestamp: new Date(),
+        };
+        return [...prev, botMsg];
+      });
       setIsTyping(false);
     }, 800 + Math.random() * 600);
   };
