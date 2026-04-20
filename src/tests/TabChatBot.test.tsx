@@ -10,11 +10,25 @@ vi.mock("framer-motion", () => ({
         const tag = String(key);
         // eslint-disable-next-line react/display-name
         const Comp = (props: Record<string, unknown>) => {
-          const { children, ...rest } = props as { children?: React.ReactNode; [k: string]: unknown };
+          const { children, ...rest } = props as {
+            children?: React.ReactNode;
+            [k: string]: unknown;
+          };
           // Filter out framer-specific props that are not valid HTML attributes
           const htmlProps: Record<string, unknown> = {};
           for (const k of Object.keys(rest)) {
-            if (!["initial", "animate", "exit", "transition", "whileTap", "whileHover", "layout", "variants"].includes(k)) {
+            if (
+              ![
+                "initial",
+                "animate",
+                "exit",
+                "transition",
+                "whileTap",
+                "whileHover",
+                "layout",
+                "variants",
+              ].includes(k)
+            ) {
               htmlProps[k] = rest[k];
             }
           }

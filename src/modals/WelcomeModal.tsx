@@ -116,7 +116,9 @@ const Welcome = (props: PropsWelcomeModal) => {
                     <IonItem
                       key={code}
                       button
-                      onClick={() => handleLanguageSelect(code)}
+                      onClick={() => {
+                        handleLanguageSelect(code).catch(err => console.error(err));
+                      }}
                       style={{
                         "--background":
                           selectedLanguage === code

@@ -12,7 +12,7 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { useTranslation } from "react-i18next";
-import { StackHandler, StackProvider, StackTheme } from '@stackframe/react';
+import { StackHandler, StackProvider, StackTheme } from "@stackframe/react";
 
 import TabsContainer from "./components/TabsContainer";
 import { stackClientApp } from "./stack";
@@ -74,12 +74,14 @@ const Badge = () => {
   );
 };
 
-
-
 function HandlerRoutes() {
   const location = useLocation();
   return (
-    <StackHandler app={stackClientApp} location={location.pathname} fullPage />
+    <StackHandler
+      app={stackClientApp}
+      location={location.pathname}
+      fullPage
+    />
   );
 }
 
@@ -296,12 +298,16 @@ const App = (props: AppProps) => {
               <Menu contentId="main-content-router-outlet" />
               <IonReactRouter>
                 <IonRouterOutlet id="main-content-router-outlet">
-                  <Route
-                    path="/tabs"
-                  >
-                    <TabsContainer theme={theme} needUpdate={needUpdate} />
+                  <Route path="/tabs">
+                    <TabsContainer
+                      theme={theme}
+                      needUpdate={needUpdate}
+                    />
                   </Route>
-                  <Route exact path="/">
+                  <Route
+                    exact
+                    path="/"
+                  >
                     <Redirect to="/tabs/home" />
                   </Route>
                 </IonRouterOutlet>
